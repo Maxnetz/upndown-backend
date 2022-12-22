@@ -1,5 +1,5 @@
 import express from "express";
-// import cors from "cors";
+import cors from "cors";
 const app = express();
 import dotenv from "dotenv";
 dotenv.config();
@@ -21,8 +21,9 @@ import authenticateUser from "./middlewares/auth.js";
 if (process.env.NODE_ENV !== "production") {
     app.use(morgan("dev"));
 }
+app.use(cors({ credentials: true, origin: "https://upndown-frontend.vercel.app" }));
 app.use(express.json());
-// app.use(cors());
+
 
 app.get("/", (req, res) => {
     res.json({ msg: "welcome" });
